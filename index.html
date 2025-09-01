@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDFに署名する全部入りガイド（タブ切替・超詳細）</title>
+  <meta name="description" content="スマホ・PC・コンビニでPDFに署名する方法を、iPhone / Android / Mac / Windows / 印刷・手書き / 送付方法の6タブで超詳細に解説。すべて標準機能のみ、Adobe説明なし。"/>
+  <style>
+    :root{
+      --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#38bdf8; --accent2:#22c55e;
+      --shadow:0 10px 28px rgba(0,0,0,.35);
+    }
+    *{ box-sizing:border-box; }
+    body{ margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif; color:var(--ink); background:linear-gradient(180deg,var(--bg),#0a1328 40%,var(--bg)); }
+
+    header{ padding:30px 18px; background:radial-gradient(1000px 280px at 10% -20%, color-mix(in oklab, var(--accent) 16%, transparent), transparent),
+                                 radial-gradient(600px 240px at 90% -30%, color-mix(in oklab, var(--accent2) 14%, transparent), transparent),
+                                 var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(6px); }
+    .hero{ max-width:1100px; margin:0 auto; text-align:center; }
+    .hero h1{ margin:0; font-size:28px; letter-spacing:.02em; }
+    .hero p{ margin:10px 0 0; color:var(--muted); }
+
+    /* Tabs */
+    .tabs{ max-width:1100px; margin:20px auto 0; padding:0 18px; }
+    .tablist{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    .tab{ appearance:none; border:none; cursor:pointer; padding:10px 14px; border-radius:12px; background:#102034; color:var(--ink); border:1px solid var(--line); font-weight:700; }
+    .tab[aria-selected="true"]{ outline:2px solid color-mix(in oklab, var(--accent) 60%, white 0%); background:#142742; }
+
+    main{ max-width:1100px; margin:18px auto 100px; padding:0 18px; }
+    .panel{ display:none; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:22px; margin:16px 0; }
+    .panel[aria-hidden="false"]{ display:block; }
+    .panel h2{ margin:0 0 6px; color:var(--accent); font-size:20px; }
+    .panel .sub{ margin:0 0 12px; color:var(--muted); font-size:14px; }
+
+    .steps{ counter-reset:step; display:grid; gap:10px; }
+    .step{ position:relative; padding:12px; border:1px dashed var(--line); border-radius:12px; background:linear-gradient(180deg, color-mix(in oklab, var(--accent) 8%, transparent), transparent); }
+    .step::before{ counter-increment:step; content:counter(step); position:absolute; left:-12px; top:-12px; width:28px; height:28px; display:grid; place-items:center; border-radius:50%; background:var(--accent); color:#062030; font-weight:900; box-shadow:0 6px 16px rgba(0,0,0,.35); }
+
+    .block{ border:1px solid var(--line); border-radius:12px; padding:12px; margin:10px 0; background:#0d1a2b; }
+    .block h3{ margin:0 0 6px; font-size:15px; color:var(--accent2); }
+    .mini{ color:var(--muted); font-size:13px; }
+    .kbd{ display:inline-block; padding:3px 7px; border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; background:#0d1a2b; }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    @media (max-width: 820px){ .grid2{ grid-template-columns: 1fr; } .hero h1{ font-size:22px; } }
+
+    .footer{ margin:40px auto 80px; max-width:1100px; color:var(--muted); font-size:13px; padding:0 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <h1>NOIGRIT署名ガイドガイド</h1>
+      <p>機種を選択後下記説明を参考にしてください！</p>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="PDF署名ガイドの機種タブ">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="p-iphone" id="t-iphone">iPhone</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-android" id="t-android">Android</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-mac" id="t-mac">Mac</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-windows" id="t-windows">Windows</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-print" id="t-print">印刷/手書き</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-send" id="t-send">送付方法</button>
+  </div>
+
+  <main>
+    <!-- iPhone -->
+    <section class="panel" id="p-iphone" role="tabpanel" aria-labelledby="t-iphone" aria-hidden="false">
+      <h2>iPhoneで署名（標準マークアップ）</h2>
+      <p class="sub">追加アプリ不要。メール/ファイル/写真から直接編集できます。</p>
+
+      <div class="steps">
+        <div class="step"><b>PDFを開く：</b> 添付メールならプレビューを開き <span class="kbd">マークアップ</span>（ペン先）をタップ。<br>ファイルAppならPDFをタップ → 右上 <span class="kbd">マークアップ</span>。</div>
+        <div class="step"><b>テキスト署名：</b> 右下「＋」→ <b>テキスト</b> → 氏名・日付・役職などを入力。<span class="mini">aA でフォント/サイズ/色を調整、ドラッグで位置合わせ。</span></div>
+        <div class="step"><b>手書き署名：</b> 下部ツールからペン → 指やApple Pencilでサイン。<span class="mini">二本指ピンチで拡大→精密に。</span></div>
+        <div class="step"><b>複数ページ：</b> 左上の縮小表示（サムネイル）でページ移動 → 各ページに同様に入力。</div>
+        <div class="step"><b>保存/共有：</b> 右上 <b>完了</b> → 共有。<span class="mini">ファイルに保存／メール返信／AirDrop など用途に応じて選択。</span></div>
+      </div>
+
+      <div class="grid2">
+        <div class="block">
+          <h3>見た目を整えるコツ</h3>
+          <ul class="mini">
+            <li>署名欄の罫線に合わせたい時は、フォントを等幅寄りに、色は濃いグレーにすると紙でも自然。</li>
+            <li>位置がズレる場合は拡大して微調整。長押しでテキスト枠を掴むと狙いやすい。</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>改変されにくくする（簡易フラット化）</h3>
+          <ol class="mini">
+            <li>共有 → <b>プリント</b> を選択。</li>
+            <li>プレビューを二本指でピンチアウトして全画面化。</li>
+            <li>左上共有 → <b>ファイルに保存</b>。<br>多くの注釈が画像化され、動かされにくくなります。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>トラブル対処</h3>
+        <ul class="mini">
+          <li>署名が薄い → ペンの太さ/不透明度を上げる。背景が暗いPDFは白ペンにすると読める。</li>
+          <li>メールに添付できないほど重い → 共有 → プリント → PDF化で軽くなることが多い。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Android -->
+    <section class="panel" id="p-android" role="tabpanel" aria-labelledby="t-android" aria-hidden="true">
+      <h2>Androidで署名（Googleドライブ注釈）</h2>
+      <p class="sub">端末差があるため、ドライブアプリが最も安定。ローカル運用が必要なら後述の印刷/手書きも検討。</p>
+
+      <div class="steps">
+        <div class="step"><b>PDFを開く：</b> Googleドライブにアップロード → タップして表示。</div>
+        <div class="step"><b>注釈で入力：</b> 画面下 <b>注釈</b>（鉛筆）→ <b>テキスト</b> を配置 → 氏名・日付を入力。</div>
+        <div class="step"><b>保存：</b> 右上 <b>保存</b>。<span class="mini">元ファイルを残したい時は「コピーを保存」。</span></div>
+      </div>
+
+      <div class="grid2">
+        <div class="block">
+          <h3>仕上げのコツ</h3>
+          <ul class="mini">
+            <li>テキストの色は濃いグレーが紙でも自然。</li>
+            <li>位置合わせはズームしてからドラッグ。必要に応じて改行で行幅を合わせる。</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>セキュリティ注意</h3>
+          <p class="mini">機密文書はクラウドに載せたくない場合があります。そうした案件はローカル編集が可能なPC（Mac/Windows）か、印刷/手書きルートが安全です。</p>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>トラブル対処</h3>
+        <ul class="mini">
+          <li>注釈が相手側で動く → 一度PCで開き「印刷→PDF」で固定化してから送付。</li>
+          <li>ファイル容量が大きい → 白黒モードに変換して保存すると軽量化しやすい。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Mac -->
+    <section class="panel" id="p-mac" role="tabpanel" aria-labelledby="t-mac" aria-hidden="true">
+      <h2>Macで署名（プレビュー）</h2>
+      <div class="steps">
+        <div class="step"><b>PDFを開く：</b> ダブルクリック（プレビュー）。</div>
+        <div class="step"><b>テキスト署名：</b> <span class="kbd">ツール → 注釈 → テキスト</span>。フォント/サイズ/色はマークアップツールバーで調整。</div>
+        <div class="step"><b>手書き署名：</b> <span class="kbd">マークアップツールバー → 署名</span> → トラックパッド/カメラで作成 → 挿入。</div>
+        <div class="step"><b>保存：</b> 通常保存、または <span class="kbd">ファイル → プリント → PDFとして保存</span> で簡易フラット化。</div>
+      </div>
+
+      <div class="grid2">
+        <div class="block">
+          <h3>きれいに見せる小ワザ</h3>
+          <ul class="mini">
+            <li>署名欄のベースラインに合わせ、行頭に全角スペースを足して微調整。</li>
+            <li>色は#111～#333相当の濃いグレーが自然。黒だと“貼った感”が出やすい。</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>パスワード付与（任意）</h3>
+          <ol class="mini">
+            <li><span class="kbd">ファイル → 書き出す</span> を開く。</li>
+            <li>フォーマット: PDF → <b>暗号化</b>にチェック → パスワード設定。</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>トラブル対処</h3>
+        <ul class="mini">
+          <li>文字がにじむ → テキストサイズを一段上げ、PDF保存時の解像度を下げすぎない。</li>
+          <li>印刷位置がズレる → 用紙サイズ（A4/Letter）と余白設定をPDF側に合わせる。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Windows -->
+    <section class="panel" id="p-windows" role="tabpanel" aria-labelledby="t-windows" aria-hidden="true">
+      <h2>Windowsで署名（Microsoft Edge）</h2>
+      <div class="steps">
+        <div class="step"><b>PDFを開く：</b> 右クリック → <b>プログラムから開く → Microsoft Edge</b>。</div>
+        <div class="step"><b>テキスト署名：</b> 上部 <b>テキストの追加</b> → 氏名・日付を入力し、ドラッグで配置。</div>
+        <div class="step"><b>手書き風：</b> <b>描画</b> を選び、マウス/タッチでサイン。太さ・透明度を調整。</div>
+        <div class="step"><b>保存/固定化：</b> フロッピーの保存、または <b>印刷 → Microsoft Print to PDF</b> で固定保存。</div>
+      </div>
+
+      <div class="block">
+        <h3>よくある落とし穴</h3>
+        <ul class="mini">
+          <li>フォント差で見え方が変わる → 受け手の環境差を避けたい場合は必ず「印刷→PDF」で固定。</li>
+          <li>複数ページで同じ署名を入れたい → 1ページに作ってからコピー＆ペースト→位置合わせ。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Print/Handwriting -->
+    <section class="panel" id="p-print" role="tabpanel" aria-labelledby="t-print" aria-hidden="true">
+      <h2>印刷/手書き（コンビニ）</h2>
+      <p class="sub">「手書き必須」や紙原本回収の指定がある相手に一番確実。</p>
+
+      <div class="steps">
+        <div class="step"><b>データ準備：</b> USB保存 or 専用アプリ（例：セブン=netprint、ファミマ/ローソン=PrintSmash）にアップロード。</div>
+        <div class="step"><b>印刷：</b> マルチコピー機で <b>文書プリント</b>。片面/両面、拡大縮小、向きを確認。</div>
+        <div class="step"><b>記入：</b> ボールペンで署名・日付。訂正は二重線＋訂正印の指示があるか事前確認。</div>
+        <div class="step"><b>スキャン：</b> <b>スキャン → PDF</b>、解像度は <b>300dpi</b> 目安、白黒/文字モード推奨。USB/スマホ/メールへ保存。</div>
+      </div>
+
+      <div class="grid2">
+        <div class="block">
+          <h3>仕上がりを良くする</h3>
+          <ul class="mini">
+            <li>曲がりやすい → 原稿台のガイドに合わせ、縁をしっかり当てる。</li>
+            <li>暗い/重い → 白黒（文字）モード、300dpiで十分。背景ムラが減り容量も軽くなる。</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>ファイル名ルール（おすすめ）</h3>
+          <p class="mini"><b>署名済_YYYYMMDD_相手名_v1.pdf</b> のように日付・相手・版数を入れるとミスが減ります。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Send -->
+    <section class="panel" id="p-send" role="tabpanel" aria-labelledby="t-send" aria-hidden="true">
+      <h2>送付方法（最終チェック）</h2>
+      <div class="steps">
+        <div class="step"><b>アドレス：noigrit@gmail.com</div>
+        <div class="step"><b>件名：【契約書署名済】</div>
+        <div class="step"><b>本文：本名を記載</div>
+      </div>
+
+      <div class="block">
+        <h3>注意事項</h3>
+        <pre class="mini">署名したページ以外のページも全て合わせてご送付ください。</pre>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">© 2025 PDF署名ガイド. 本ページは一般的な実務ノウハウの提供を目的としています。</div>
+
+  <script>
+    // Tab behavior
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.panel'));
+
+    function activate(id){
+      tabs.forEach(t=>t.setAttribute('aria-selected', String(t.id === 't-'+id)));
+      panels.forEach(p=>p.setAttribute('aria-hidden', String(p.id !== 'p-'+id)));
+      // Scroll to header for compact view on mobile
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    tabs.forEach(t=>{
+      t.addEventListener('click', ()=>{
+        const target = t.id.replace('t-','');
+        activate(target);
+      });
+      t.addEventListener('keydown', (e)=>{
+        // arrow key navigation
+        const i = tabs.indexOf(t);
+        if(e.key === 'ArrowRight'){ (tabs[i+1]||tabs[0]).focus(); }
+        if(e.key === 'ArrowLeft'){ (tabs[i-1]||tabs[tabs.length-1]).focus(); }
+      })
+    });
+  </script>
+</body>
+</html>
