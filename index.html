@@ -12,6 +12,8 @@
       --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#38bdf8; --accent2:#22c55e;
       --ng-y1:#fde047; --ng-y2:#f59e0b; --ng-stroke:#eab308;
       --shadow:0 6px 16px rgba(0,0,0,.25);
+      /* 追加：注意強調色 */
+      --danger:#ef4444;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; margin:0; padding:0; }
@@ -45,6 +47,8 @@
     .notice{ border:1px solid #3b3b28; background:#171710; border-radius:12px; padding:14px; }
     .notice h3{ margin:0 0 8px; color:#fde68a; font-size:16px; }
     .notice ul{ margin:8px 0 0 18px; padding:0; }
+    /* 追加：注意事項内の太字を赤太字に */
+    #p-intro .notice b{ color:var(--danger); font-weight:800; }
 
     .subsel{ display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; justify-content:center; }
     .chip{ appearance:none; border:1px solid #2b3a50; background:#0e1d30; color:var(--ink); border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; font-size:14px; }
@@ -74,7 +78,6 @@
     .sendbox{ border:1px solid #35507a; background:#0b203a; border-radius:12px; padding:12px; }
     .sendbox h4{ margin:0 0 6px; font-size:14px; color:#8ec1ff; }
     .sendbox code{ display:block; background:#071425; border:1px solid #11294a; padding:10px; border-radius:8px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; white-space:pre-wrap; word-break:break-word; color:#dbeafe; }
-      --danger:#ef4444;
   </style>
 </head>
 <body>
@@ -108,7 +111,7 @@
             <li>送付は「配信申込書兼承諾書」だけでなく <b>署名ページを含む全ページ</b> を添付してください。</li>
             <li><b>誤字・脱字がないか</b> をご確認ください。</li>
             <li><b>期日を過ぎると契約できない場合</b> があります。必ず期限内にご対応ください。</li>
-                <li><b>※未成年の場合は親権者兼法廷代理人の箇所も記入してください。</li>
+            <li><b>※未成年の場合は親権者兼法定代理人の箇所も記入してください。</b></li>
           </ul>
         </div>
       </div>
@@ -139,26 +142,27 @@
               <li>左上共有 → <b>ファイルに保存</b>。</li>
             </ol>
           </div>
-          </div>
         </div>
-        <div class="sendbox">
-          <h4>送付方法</h4>
-          <code>アドレス：noigrit@gmail.com
+      </div>
+      <div class="sendbox">
+        <h4>送付方法</h4>
+        <code>アドレス：noigrit@gmail.com
 件名：【契約書署名済】
 本文：本名記載（フルネーム）</code>
-        </div>
+      </div>
+
       <div class="phone-android" style="display:none;">
         <div class="steps" style="margin-top:10px;">
           <div class="step"><b>PDFを開く：</b> Googleドライブにアップロード → タップして表示。</div>
           <div class="step"><b>注釈で入力：</b> 画面下 <b>注釈</b>（鉛筆）→ <b>テキスト</b> を配置 → 氏名・日付を入力。</div>
           <div class="step"><b>保存：</b> 右上 <b>保存</b>。<span class="mini">元ファイルを残したい場合は「コピーを保存」。</span></div>
-             <div class="step"><b>送付：保存したPDFを下記メールアドレスに送信。</b> </div>
+          <div class="step"><b>送付：</b> 保存したPDFを下記メールアドレスに送信。</div>
         </div>
         <div class="grid2">
           <div class="block">
             <h3>補足</h3>
             <p class="mini">機密性が高い場合はPCでローカル編集、または印刷/手書きを推奨。</p>
-              <p class="mini">箇所ごとのズレについてゃ拡大をしてドラックで調整。</p>
+            <p class="mini">箇所ごとのズレについては拡大してドラッグで調整。</p>
           </div>
         </div>
         <div class="sendbox">
@@ -178,12 +182,13 @@
         <button class="chip" id="c-mac" aria-pressed="true">Mac</button>
         <button class="chip" id="c-windows" aria-pressed="false">Windows</button>
       </div>
+
       <div class="pc-mac">
         <div class="steps" style="margin-top:10px;">
-          <div class="step"><b>PDF取り込み：PDFをダウンロードする。</div>
-          <div class="step"><b>記入方法：ダウンロードしたPDFを開き、配信申し込み書兼承諾書を選択『フォーム入力のツールバー』をタップ。「申込日、氏名、住所、生年月日、アドレス。電話番号」にテキスト入力を行う。※未成年者の場合は親権者兼法定代理人のア所も記入</div>
-          <div class="step"><b>記入漏れ：入力内容の確認</div>
-          <div class="step"><b>送付：下記メールアドレル宛に記入したPDFを添付し送信を行う。</div>
+          <div class="step"><b>PDF取り込み：</b> PDFをダウンロードする。</div>
+          <div class="step"><b>記入方法：</b> ダウンロードしたPDFを開き、「配信申込書兼承諾書」を選択→『フォーム入力のツールバー』をクリック。「申込日、氏名、住所、生年月日、アドレス、電話番号」にテキスト入力。※未成年者の場合は親権者兼法定代理人の箇所も記入。</div>
+          <div class="step"><b>記入漏れ：</b> 入力内容を確認。</div>
+          <div class="step"><b>送付：</b> 下記メールアドレス宛に記入済みPDFを添付して送信。</div>
         </div>
         <div class="grid2">
           <div class="block">
@@ -193,21 +198,22 @@
               <li>用紙サイズ（A4/Letter）に注意。印刷時のズレ防止。</li>
             </ul>
           </div>
-          </div>
         </div>
-        <div class="sendbox">
-          <h4>送付方法</h4>
-          <code>アドレス：noigrit@gmail.com
+      </div>
+
+      <div class="sendbox">
+        <h4>送付方法</h4>
+        <code>アドレス：noigrit@gmail.com
 件名：【契約書署名済】
 本文：本名記載（フルネーム）</code>
-        </div>
+      </div>
+
       <div class="pc-windows" style="display:none;">
         <div class="steps" style="margin-top:10px;">
           <div class="step"><b>PDFを開く：</b> 右クリック → <b>プログラムから開く → Microsoft Edge</b>。</div>
           <div class="step"><b>テキスト署名：</b> 上部 <b>テキストの追加</b> → 氏名・日付を入力し、ドラッグで配置。</div>
-          <div class="step"><b>固定化：</b>『印刷』を押しMicrosoft print to PDFで保存 <b></div>
-          <div class="step"><b>送付：</b>記入事項を確認後下記メールアドレスにPDFを添付し送信を行う<b></div>
-        </div>
+          <div class="step"><b>固定化：</b> 「印刷」を押し <b>Microsoft Print to PDF</b> で保存。</div>
+          <div class="step"><b>送付：</b> 記入事項を確認後、下記メールアドレスにPDFを添付して送信。</div>
         </div>
         <div class="grid2">
           <div class="block">
@@ -224,7 +230,9 @@
 件名：【契約書署名済】
 本文：本名記載（フルネーム）</code>
         </div>
+      </div>
     </section>
+
     <!-- PRINT/HANDWRITE -->
     <section class="panel" id="p-print" role="tabpanel" aria-labelledby="t-print" aria-hidden="true">
       <h2>その他（印刷/手書き）</h2>
@@ -233,7 +241,7 @@
         <div class="step"><b>データ準備：</b> PDFダウンロードしUSBに保存 or 専用アプリ(セブン=netprint、ファミマ/ローソン=PrintSmash）をインストール。</div>
         <div class="step"><b>印刷：</b> こちらを参照(https://www.printing.ne.jp/support/landing/landing_pdfprint.html)</div>
         <div class="step"><b>記入：</b> ボールペンで署名・日付。訂正は二重線＋訂正印の指示があるか事前確認。</div>
-        <div class="step"><b>スキャン：</b> <b>スキャン方法はこちらを参照(https://pdf.wondershare.jp/info/paper-to-pdf-convenience-store.html)スマホやUSBに取り込み後下記メールアドレスに添付し送信。</b><b></b></div>
+        <div class="step"><b>スキャン：</b> <b>スキャン方法はこちらを参照(https://pdf.wondershare.jp/info/paper-to-pdf-convenience-store.html)</b> スマホやUSBに取り込み後、下記メールアドレスに添付して送信。</div>
       </div>
       <div class="grid2">
         <div class="block">
