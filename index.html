@@ -17,11 +17,8 @@
 
     header{ padding:calc(18px + env(safe-area-inset-top)) 16px 14px; background:var(--panel); border-bottom:1px solid var(--line); position:relative; z-index:1; }
     .hero{ max-width:1100px; margin:0 auto; text-align:center; }
-
     .brand{ display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
-    .logo-badge{ display:inline-flex; align-items:center; justify-content:center; padding:.5em 1.2em; border-radius:14px;
-      background:linear-gradient(135deg, var(--ng-y1), var(--ng-y2)); color:#1f2937;
-      font-weight:900; font-size:24px; letter-spacing:.1em; border:1px solid var(--ng-stroke); text-transform:uppercase; }
+    .logo-badge{ display:inline-flex; align-items:center; justify-content:center; padding:.5em 1.2em; border-radius:14px; background:linear-gradient(135deg, var(--ng-y1), var(--ng-y2)); color:#1f2937; font-weight:900; font-size:24px; letter-spacing:.1em; border:1px solid var(--ng-stroke); text-transform:uppercase; }
     .brand h1{ margin:0; font-size:26px; font-weight:700; }
     .hero p{ margin:10px 0 0; color:var(--muted); font-size:15px; }
 
@@ -36,19 +33,16 @@
     .panel h2{ margin:0 0 10px; color:var(--accent); font-size:20px; }
     .panel .sub{ margin:0 0 12px; color:var(--muted); font-size:14px; }
 
-    /* 注意事項ブロック（赤太字は最小指定で安定） */
     .notice{ border:1px solid #3b3b28; background:#171710; border-radius:12px; padding:16px; margin-top:16px; }
     .notice h3{ margin:0 0 12px; color:#fde047; font-size:16px; }
     .notice ul{ margin:0; padding-left:20px; }
     .notice li{ margin:6px 0; line-height:1.6; color:#e5e7eb; }
     .notice b, .notice strong{ color: var(--danger); font-weight:800; }
 
-    /* 機種/OSチップ */
     .subsel{ display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; justify-content:center; }
     .chip{ appearance:none; border:1px solid #2b3a50; background:#0e1d30; color:var(--ink); border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; font-size:14px; }
     .chip[aria-pressed="true"]{ outline:2px solid var(--accent2); background:#12324f; }
 
-    /* STEP layout（軽量） */
     .steps{ counter-reset:step; display:grid; gap:12px; }
     .step{ border:1px solid #2a3b55; border-radius:10px; padding:12px; margin:14px 0; background:#0d1a2b; }
     .step-title{ font-weight:800; margin-bottom:8px; font-size:15px; }
@@ -56,7 +50,6 @@
     .step-body{ background:#071425; border:1px solid #11294a; border-radius:8px; padding:10px; font-size:14px; }
     .arrow{ text-align:center; margin:6px 0; font-size:20px; color:#94a3b8; }
 
-    /* 送付ボックス */
     .sendbox{ border:1px solid #35507a; background:#0b203a; border-radius:12px; padding:12px; margin-top:20px; }
     .sendbox h4{ margin:0 0 6px; font-size:14px; color:#8ec1ff; }
     .sendbox code{ display:block; background:#071425; border:1px solid #11294a; padding:10px; border-radius:8px; font-family:ui-monospace, monospace; white-space:pre-wrap; color:#dbeafe; }
@@ -69,6 +62,21 @@
     }
 
     .footer{ margin:32px auto 60px; max-width:1100px; color:#94a3b8; font-size:12.5px; padding:0 16px; text-align:center; }
+
+    /* ===== モーダル・ギャラリー ===== */
+    .img-toggle{ color:#38bdf8; cursor:pointer; text-decoration:underline; }
+    .modal{ display:none; position:fixed; z-index:9999; inset:0; background:rgba(0,0,0,.85); }
+    .modal-inner{ position:absolute; inset:0; display:grid; grid-template-rows:auto 1fr auto; }
+    .modal-header{ display:flex; justify-content:flex-end; padding:10px 14px; }
+    .modal-close{ font-size:30px; color:#fff; cursor:pointer; line-height:1; }
+    .modal-body{ display:grid; place-items:center; padding:8px; }
+    .modal-body img{ max-width:92vw; max-height:76vh; border-radius:10px; }
+    .modal-footer{ display:flex; align-items:center; justify-content:center; gap:12px; padding:10px; }
+    .nav-btn{ border:1px solid #93c5fd; background:#1e293b; color:#e5e7eb; padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:700; }
+    .counter{ color:#cbd5e1; font-size:13px; }
+    .thumbs{ display:flex; gap:6px; overflow-x:auto; padding:6px 10px; }
+    .thumbs img{ height:56px; border-radius:6px; opacity:.7; border:2px solid transparent; cursor:pointer; }
+    .thumbs img.active{ opacity:1; border-color:#38bdf8; }
   </style>
 </head>
 <body>
@@ -118,28 +126,60 @@
       <!-- iPhone -->
       <div class="phone-iphone">
         <div class="steps">
-          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">プレビューで「マークアップ」またはファイルAppで右上「マークアップ」。</div></div>
+          <div class="step">
+            <div class="step-title">PDFを開く</div>
+            <div class="step-body">
+              メールに添付されているファイルを開く→「マークアップ」
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/iphone_step1_1.png,screenshots/iphone_step1_2.png" data-alt="iPhone マークアップ手順">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">右下「＋」→テキストを配置して氏名・日付を入力。</div></div>
+          <div class="step">
+            <div class="step-title">テキスト署名</div>
+            <div class="step-body">
+              二本の指でスライドし11ページ目へ→右下「＋」→「テキストを追加」→サイズ18ptで氏名/住所/メール/電話を入力
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/iphone_step2_1.png,screenshots/iphone_step2_2.png,screenshots/iphone_step2_3.png" data-alt="iPhone テキスト追加">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">手書き署名</div><div class="step-body">ペンツールでサイン（拡大すると書きやすい）。</div></div>
-          <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">複数ページ</div><div class="step-body">サムネイルから該当ページへ移動し同様に記入。</div></div>
-          <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">保存/共有</div><div class="step-body">右上「完了」→「共有」→メール送信。</div></div>
+       <div class="step">
+  <div class="step-title">保存/共有</div>
+  <div class="step-body">
+    右上「完了」→「共有」→メールアプリを選択し、下記「送付方法」を参考に送付
+    <span class="img-toggle"
+          onclick="openGallery(this)"
+          data-images="screenshots/iphone_step3_1.png,screenshots/iphone_step3_2.png"
+          data-alt="iPhone STEP3 保存と送付">(画像を参照)</span>
+  </div>
+</div>
         </div>
       </div>
 
-      <!-- Android -->
+      <!-- Android（Acrobat想定） -->
       <div class="phone-android" style="display:none;">
         <div class="steps">
-          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">GoogleドライブにアップロードしてPDFをタップ。</div></div>
+          <div class="step">
+            <div class="step-title">PDFを開く（Acrobatで）</div>
+            <div class="step-body">
+              Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」(アプリがない場合はインストールしてください)
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png" data-alt="Android Acrobatで開く">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">注釈で入力</div><div class="step-body">注釈（鉛筆）→テキストを配置→氏名・日付を入力。</div></div>
+          <div class="step">
+            <div class="step-title">テキスト入力</div>
+            <div class="step-body">
+              下部「塗りつぶしと署名」→「テキストを追加（Aa）」→ 氏名/住所/メール/電話を入力
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png" data-alt="Android テキスト入力">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">保存</div><div class="step-body">右上「保存」。元ファイルを残すなら「コピーを保存」。</div></div>
-          <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信。</div></div>
+          <div class="step">
+            <div class="step-title">保存と送付</div>
+            <div class="step-body">
+              右上「共有」または「このデバイスに保存」でPDF保存→メールに添付して送信
+            </div>
+          </div>
         </div>
       </div>
 
@@ -163,26 +203,26 @@
       <!-- Mac -->
       <div class="pc-mac">
         <div class="steps">
-          <div class="step"><div class="step-title">契約書(PDF)のダウンロード</div><div class="step-body">メールに添付されている契約書をローカルに保存。</div></div>
+          <div class="step"><div class="step-title">契約書(PDF)のダウンロード</div><div class="step-body">メールの添付PDFをローカルに保存（デスクトップ等、わかりやすい場所）</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">契約書(PDF)の記入</div><div class="step-body">PDFを開き「配信申込書兼承諾書」を選択→フォーム入力ツールバーで「申込日／氏名／住所／生年月日／アドレス／電話番号」を入力。未成年は親権者欄も記入。</div></div>
+          <div class="step"><div class="step-title">契約書(PDF)の記入</div><div class="step-body">PDFを開き「配信申込書兼承諾書」→フォーム入力ツールで申込日/氏名/住所/生年月日/アドレス/電話番号を入力（未成年は親権者欄も）</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">記入漏れ確認</div><div class="step-body">誤字・脱字や未入力がないかチェック。</div></div>
+          <div class="step"><div class="step-title">記入漏れ確認</div><div class="step-body">誤字・未入力がないか全ページを確認</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">送付</div><div class="step-body">完成PDFをメールに添付して送信。</div></div>
+          <div class="step"><div class="step-title">送付</div><div class="step-body">完成PDFをメールに添付して送信</div></div>
         </div>
       </div>
 
       <!-- Windows -->
       <div class="pc-windows" style="display:none;">
         <div class="steps">
-          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">PDFを右クリック→「プログラムから開く」→Microsoft Edge。</div></div>
+          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">ファイルを右クリック→「プログラムから開く」→Microsoft Edge</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">上部「テキストの追加」で氏名・日付を入力し、ドラッグで位置調整。</div></div>
+          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">上部「テキストの追加」→氏名・日付など入力→ドラッグで位置調整</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">固定化</div><div class="step-body">「印刷」→プリンター「Microsoft Print to PDF」で保存（フォント差異防止）。</div></div>
+          <div class="step"><div class="step-title">固定化</div><div class="step-body">「印刷」→「Microsoft Print to PDF」で保存（フォント差異防止）</div></div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信。</div></div>
+          <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信</div></div>
         </div>
       </div>
 
@@ -199,13 +239,13 @@
       <h2>その他（印刷/手書き）</h2>
       <p class="sub">「手書き必須」や紙原本回収の指定がある相手に確実。</p>
       <div class="steps">
-        <div class="step"><div class="step-title">データ準備</div><div class="step-body">PDFをダウンロードしてUSBに保存、またはコンビニ印刷アプリ（セブン=netprint、ファミマ/ローソン=PrintSmash）を準備。</div></div>
+        <div class="step"><div class="step-title">データ準備</div><div class="step-body">PDFをダウンロードしてUSBに保存、またはコンビニ印刷アプリ（セブン=netprint、ファミマ/ローソン=PrintSmash）を準備</div></div>
         <div class="arrow">↓</div>
-        <div class="step"><div class="step-title">印刷</div><div class="step-body">店頭の指示に従ってPDFを印刷。</div></div>
+        <div class="step"><div class="step-title">印刷</div><div class="step-body">店頭の案内に従いPDFを印刷（A4推奨、濃度は標準）</div></div>
         <div class="arrow">↓</div>
-        <div class="step"><div class="step-title">記入</div><div class="step-body">ボールペンで署名・日付。訂正が必要な場合は二重線＋訂正印の有無を事前確認。</div></div>
+        <div class="step"><div class="step-title">記入</div><div class="step-body">ボールペンで署名・日付。修正は二重線＋訂正印の有無を事前確認</div></div>
         <div class="arrow">↓</div>
-        <div class="step"><div class="step-title">スキャン</div><div class="step-body">スキャナやスマホでPDF化し、メールに添付して送信。</div></div>
+        <div class="step"><div class="step-title">スキャン</div><div class="step-body">スマホやスキャナでPDF化→メールに添付して送信</div></div>
       </div>
 
       <div class="sendbox">
@@ -219,7 +259,7 @@
 
   <div class="footer">© 2025 NOIGRIT 署名マニュアル. 本ページは一般的な実務ノウハウの提供を目的としています。</div>
 
-  <!-- JS：タブ & 機種/OS 切り替え（軽量） -->
+  <!-- JS：タブ & 機種/OS 切り替え + モーダル -->
   <script>
     // タブ切り替え
     const tabs = Array.from(document.querySelectorAll('.tab'));
@@ -261,6 +301,79 @@
         pcm.style.display='none'; pcw.style.display='block';
       });
     }
+
+    // ===== モーダル・ギャラリー（1つを使い回す） =====
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+      <div class="modal-inner" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <span class="modal-close" aria-label="閉じる">&times;</span>
+        </div>
+        <div class="modal-body"><img alt=""></div>
+        <div class="modal-footer">
+          <button class="nav-btn" data-dir="-1">← 前へ</button>
+          <span class="counter">1 / 1</span>
+          <button class="nav-btn" data-dir="1">次へ →</button>
+        </div>
+        <div class="thumbs"></div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    let gallery = { urls:[], index:0, alt:'' };
+
+    function render() {
+      const img = modal.querySelector('.modal-body img');
+      const counter = modal.querySelector('.counter');
+      const thumbs = modal.querySelector('.thumbs');
+      img.src = gallery.urls[gallery.index];
+      img.alt = gallery.alt || 'スクリーンショット';
+      counter.textContent = (gallery.index+1) + ' / ' + gallery.urls.length;
+      thumbs.innerHTML = '';
+      gallery.urls.forEach((u,i)=>{
+        const t = document.createElement('img');
+        t.src = u; t.alt = 'thumb '+(i+1);
+        if(i===gallery.index) t.classList.add('active');
+        t.addEventListener('click', ()=>{ gallery.index=i; render(); });
+        thumbs.appendChild(t);
+      });
+    }
+
+    function show(delta){
+      gallery.index = (gallery.index + delta + gallery.urls.length) % gallery.urls.length;
+      render();
+    }
+
+    function closeModal(){
+      modal.style.display='none';
+      gallery = { urls:[], index:0, alt:'' };
+    }
+
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) closeModal();
+    });
+    modal.querySelector('.modal-close').addEventListener('click', closeModal);
+    modal.querySelectorAll('.nav-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> show(parseInt(btn.dataset.dir,10)));
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(modal.style.display==='block'){
+        if(e.key==='Escape') closeModal();
+        if(e.key==='ArrowRight') show(1);
+        if(e.key==='ArrowLeft') show(-1);
+      }
+    });
+
+    // 公開関数：トリガー要素から data-images を読む
+    window.openGallery = function(trigger){
+      const urls = (trigger.dataset.images || '').split(',').map(s=>s.trim()).filter(Boolean);
+      if(!urls.length) return;
+      gallery.urls = urls;
+      gallery.index = 0;
+      gallery.alt = trigger.dataset.alt || '';
+      render();
+      modal.style.display='block';
+    };
   </script>
 </body>
 </html>
