@@ -5,79 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NOIGRIT 署名マニュアル｜PDFに署名する全部入りガイド</title>
   <meta name="description" content="NOIGRIT向け 署名マニュアル。スマホ（iPhone/Android）・PC（Mac/Windows）・印刷手書きの3カテゴリで超詳細に解説。標準機能のみ。スマホ最適化・軽量表示。"/>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#38bdf8; --accent2:#22c55e;
       --ng-y1:#fde047; --ng-y2:#f59e0b; --ng-stroke:#eab308;
-      --shadow:0 6px 16px rgba(0,0,0,.25);
-      /* 追加：注意強調色 */
       --danger:#ef4444;
     }
     *{ box-sizing:border-box; }
     html,body{ height:100%; margin:0; padding:0; }
-    body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif; color:var(--ink); background:linear-gradient(180deg,var(--bg),#0a1328 40%,var(--bg)); }
+    body{ font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif; color:var(--ink); background:#0b1220; }
 
-    header{ padding:calc(18px + env(safe-area-inset-top)) 16px 14px; background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:40; }
+    header{ padding:calc(18px + env(safe-area-inset-top)) 16px 14px; background:var(--panel); border-bottom:1px solid var(--line); position:relative; z-index:1; }
     .hero{ max-width:1100px; margin:0 auto; text-align:center; }
 
     .brand{ display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
     .logo-badge{ display:inline-flex; align-items:center; justify-content:center; padding:.5em 1.2em; border-radius:14px;
       background:linear-gradient(135deg, var(--ng-y1), var(--ng-y2)); color:#1f2937;
-      font-family:'Montserrat', sans-serif; font-weight:900; font-size:24px; letter-spacing:.1em;
-      border:1px solid var(--ng-stroke); box-shadow:inset 0 1px 0 rgba(255,255,255,.5), var(--shadow);
-      text-transform:uppercase;
-    }
-    .brand h1{ margin:0; font-size:26px; letter-spacing:.02em; font-weight:700; font-family:'Montserrat', sans-serif; }
+      font-weight:900; font-size:24px; letter-spacing:.1em; border:1px solid var(--ng-stroke); text-transform:uppercase; }
+    .brand h1{ margin:0; font-size:26px; font-weight:700; }
     .hero p{ margin:10px 0 0; color:var(--muted); font-size:15px; }
 
-    .tabs{ max-width:1100px; margin:12px auto 0; padding:10px 12px 8px; display:flex; gap:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; border-top:1px solid rgba(255,255,255,.04); }
+    .tabs{ max-width:1100px; margin:12px auto 0; padding:10px; display:flex; gap:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; border-top:1px solid rgba(255,255,255,.04); }
     .tabs::-webkit-scrollbar{ display:none; }
-    .tab{ appearance:none; border:none; cursor:pointer; padding:14px 18px; border-radius:999px; background:#0f2036; color:var(--ink); border:1px solid #253449; font-weight:800; flex:0 0 auto; white-space:nowrap; font-size:15px; line-height:1.2; }
-    .tab[aria-selected="true"]{ outline:2px solid color-mix(in oklab, var(--accent) 60%, white 0%); background:#142742; }
+    .tab{ appearance:none; border:none; cursor:pointer; padding:14px 18px; border-radius:999px; background:#0f2036; color:var(--ink); border:1px solid #253449; font-weight:800; flex:0 0 auto; white-space:nowrap; font-size:15px; }
+    .tab[aria-selected="true"]{ outline:2px solid #38bdf866; background:#142742; }
 
     main{ max-width:1100px; margin:16px auto 80px; padding:0 16px; }
-    .panel{ display:none; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:20px; margin:16px 0; }
+    .panel{ display:none; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px; margin:16px 0; }
     .panel[aria-hidden="false"]{ display:block; }
     .panel h2{ margin:0 0 10px; color:var(--accent); font-size:20px; }
     .panel .sub{ margin:0 0 12px; color:var(--muted); font-size:14px; }
 
-    .intro-grid{ display:grid; grid-template-columns:1fr; gap:14px; text-align:left; }
-    .notice{ border:1px solid #3b3b28; background:#171710; border-radius:12px; padding:14px; }
-    .notice h3{ margin:0 0 8px; color:#fde68a; font-size:16px; }
-    .notice ul{ margin:8px 0 0 18px; padding:0; }
-    /* 追加：注意事項内の太字を赤太字に */
-    #p-intro .notice b{ color:var(--danger); font-weight:800; }
+    /* 注意事項ブロック（赤太字は最小指定で安定） */
+    .notice{ border:1px solid #3b3b28; background:#171710; border-radius:12px; padding:16px; margin-top:16px; }
+    .notice h3{ margin:0 0 12px; color:#fde047; font-size:16px; }
+    .notice ul{ margin:0; padding-left:20px; }
+    .notice li{ margin:6px 0; line-height:1.6; color:#e5e7eb; }
+    .notice b, .notice strong{ color: var(--danger); font-weight:800; }
 
+    /* 機種/OSチップ */
     .subsel{ display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; justify-content:center; }
     .chip{ appearance:none; border:1px solid #2b3a50; background:#0e1d30; color:var(--ink); border-radius:10px; padding:10px 14px; font-weight:700; cursor:pointer; font-size:14px; }
     .chip[aria-pressed="true"]{ outline:2px solid var(--accent2); background:#12324f; }
 
+    /* STEP layout（軽量） */
     .steps{ counter-reset:step; display:grid; gap:12px; }
-    .step{ position:relative; padding:14px 14px 14px 20px; border:1px dashed var(--line); border-radius:12px; background:linear-gradient(180deg, color-mix(in oklab, var(--accent) 8%, transparent), transparent); }
-    .step::before{ counter-increment:step; content:counter(step); position:absolute; left:10px; top:-12px; width:26px; height:26px; display:grid; place-items:center; border-radius:50%; background:var(--accent); color:#062030; font-weight:900; box-shadow:0 4px 10px rgba(0,0,0,.28); font-size:13px; }
+    .step{ border:1px solid #2a3b55; border-radius:10px; padding:12px; margin:14px 0; background:#0d1a2b; }
+    .step-title{ font-weight:800; margin-bottom:8px; font-size:15px; }
+    .step-title::before{ counter-increment:step; content:"STEP" counter(step) " "; font-weight:900; margin-right:4px; }
+    .step-body{ background:#071425; border:1px solid #11294a; border-radius:8px; padding:10px; font-size:14px; }
+    .arrow{ text-align:center; margin:6px 0; font-size:20px; color:#94a3b8; }
 
-    .block{ border:1px solid var(--line); border-radius:12px; padding:12px; margin:12px 0; background:#0d1a2b; }
-    .block h3{ margin:0 0 6px; font-size:15px; color:var(--accent2); }
-    .mini{ color:var(--muted); font-size:14px; line-height:1.7; }
-    .kbd{ display:inline-block; padding:3px 7px; border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px; background:#0d1a2b; }
-
-    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    /* 送付ボックス */
+    .sendbox{ border:1px solid #35507a; background:#0b203a; border-radius:12px; padding:12px; margin-top:20px; }
+    .sendbox h4{ margin:0 0 6px; font-size:14px; color:#8ec1ff; }
+    .sendbox code{ display:block; background:#071425; border:1px solid #11294a; padding:10px; border-radius:8px; font-family:ui-monospace, monospace; white-space:pre-wrap; color:#dbeafe; }
 
     @media (max-width:720px){
       .brand h1{ font-size:22px; }
       .logo-badge{ font-size:20px; }
       .panel{ padding:18px; }
-      .grid2{ grid-template-columns:1fr; }
-      .step{ padding:12px; }
-      .mini{ font-size:13.5px; }
+      .step-body{ font-size:13.5px; }
     }
 
-    .footer{ margin:32px auto 60px; max-width:1100px; color:var(--muted); font-size:12.5px; padding:0 16px; text-align:center; }
-    .sendbox{ border:1px solid #35507a; background:#0b203a; border-radius:12px; padding:12px; }
-    .sendbox h4{ margin:0 0 6px; font-size:14px; color:#8ec1ff; }
-    .sendbox code{ display:block; background:#071425; border:1px solid #11294a; padding:10px; border-radius:8px; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; white-space:pre-wrap; word-break:break-word; color:#dbeafe; }
+    .footer{ margin:32px auto 60px; max-width:1100px; color:#94a3b8; font-size:12.5px; padding:0 16px; text-align:center; }
   </style>
 </head>
 <body>
@@ -92,9 +83,9 @@
   </header>
 
   <div class="tabs" role="tablist" aria-label="NOIGRIT 署名カテゴリ">
-    <button class="tab" role="tab" aria-selected="true" aria-controls="p-intro" id="t-intro">使い方 / 注意事項</button>
+    <button class="tab" role="tab" aria-selected="true" aria-controls="p-intro"  id="t-intro">使い方 / 注意事項</button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-phone" id="t-phone">スマホで署名する場合</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-pc" id="t-pc">PCで署名する場合</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-pc"    id="t-pc">PCで署名する場合</button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-print" id="t-print">その他（印刷/手書き）</button>
   </div>
 
@@ -102,97 +93,96 @@
     <!-- INTRO -->
     <section class="panel" id="p-intro" role="tabpanel" aria-labelledby="t-intro" aria-hidden="false">
       <h2>NOIGRIT署名マニュアルの使い方</h2>
-      <div class="intro-grid">
-        <p class="sub">スマホ / PC / 印刷からお選びください。各ページの最後に送付方法があります。</p>
-        <div class="notice">
-          <h3>注意事項</h3>
-          <ul>
-            <li>ご記入いただくのは「<b>配信申込書兼承諾書</b>」のみです。</li>
-            <li>送付は「配信申込書兼承諾書」だけでなく <b>署名ページを含む全ページ</b> を添付してください。</li>
-            <li><b>誤字・脱字がないか</b> をご確認ください。</li>
-            <li><b>期日を過ぎると契約できない場合</b> があります。必ず期限内にご対応ください。</li>
-            <li><b>※未成年の場合は親権者兼法定代理人の箇所も記入してください。</b></li>
-          </ul>
-        </div>
+      <p class="sub">スマホ / PC / 印刷からお選びください。各ページの最後に送付方法があります。</p>
+      <div class="notice">
+        <h3>注意事項</h3>
+        <ul>
+          <li>ご記入いただくのは「<b>配信申込書兼承諾書</b>」のみです。</li>
+          <li>送付は「配信申込書兼承諾書」だけでなく <b>署名ページを含む全ページ</b> を添付してください。</li>
+          <li><b>誤字・脱字がないか</b> をご確認ください。</li>
+          <li><b>期日を過ぎると契約できない場合</b> があります。必ず期限内にご対応ください。</li>
+          <li><b>※未成年の場合は親権者兼法定代理人の箇所も記入してください。</b></li>
+        </ul>
       </div>
     </section>
 
-    <!-- PHONE (iPhone/Android) -->
+    <!-- PHONE -->
     <section class="panel" id="p-phone" role="tabpanel" aria-labelledby="t-phone" aria-hidden="true">
       <h2>スマホで署名する場合</h2>
       <p class="sub">お使いの機種を選んでください。</p>
       <div class="subsel" role="group" aria-label="スマホ機種選択">
-        <button class="chip" id="c-iphone" aria-pressed="true">iPhone</button>
+        <button class="chip" id="c-iphone"  aria-pressed="true">iPhone</button>
         <button class="chip" id="c-android" aria-pressed="false">Android</button>
       </div>
+
+      <!-- iPhone -->
       <div class="phone-iphone">
-        <div class="steps" style="margin-top:10px;">
-          <div class="step"><b>PDFを開く：</b> プレビューで <span class="kbd">マークアップ</span>。またはファイルAppでPDF→右上 <span class="kbd">マークアップ</span>。</div>
-          <div class="step"><b>テキスト署名：</b> 右下「＋」→ <b>テキスト</b>。氏名・日付を入力。<span class="mini">aAでフォント/サイズ/色を調整、ドラッグで位置合わせ。</span></div>
-          <div class="step"><b>手書き署名：</b> 下部ツールからペン→指/Apple Pencilでサイン。<span class="mini">二本指ピンチで拡大すると精密。</span></div>
-          <div class="step"><b>複数ページ：</b> サムネイルから該当ページに移動し、同様に記入。</div>
-          <div class="step"><b>保存/共有：</b> 右上 <b>完了</b> → 共有→メール送信を選択し下記メールアドレスに送信を行う。</div>
-        </div>
-        <div class="grid2">
-          <div class="block">
-            <h3>補足</h3>
-            <ol class="mini">
-              <li>共有 → <b>プリント</b> を選択。</li>
-              <li>プレビューを二本指でピンチアウトして全画面化。</li>
-              <li>左上共有 → <b>ファイルに保存</b>。</li>
-            </ol>
-          </div>
+        <div class="steps">
+          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">プレビューで「マークアップ」またはファイルAppで右上「マークアップ」。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">右下「＋」→テキストを配置して氏名・日付を入力。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">手書き署名</div><div class="step-body">ペンツールでサイン（拡大すると書きやすい）。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">複数ページ</div><div class="step-body">サムネイルから該当ページへ移動し同様に記入。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">保存/共有</div><div class="step-body">右上「完了」→「共有」→メール送信。</div></div>
         </div>
       </div>
+
+      <!-- Android -->
+      <div class="phone-android" style="display:none;">
+        <div class="steps">
+          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">GoogleドライブにアップロードしてPDFをタップ。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">注釈で入力</div><div class="step-body">注釈（鉛筆）→テキストを配置→氏名・日付を入力。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">保存</div><div class="step-body">右上「保存」。元ファイルを残すなら「コピーを保存」。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信。</div></div>
+        </div>
+      </div>
+
       <div class="sendbox">
         <h4>送付方法</h4>
         <code>アドレス：noigrit@gmail.com
 件名：【TikTok契約書署名済み】
 本文：本名記載（フルネーム）</code>
       </div>
-
-      <div class="phone-android" style="display:none;">
-        <div class="steps" style="margin-top:10px;">
-          <div class="step"><b>PDFを開く：</b> Googleドライブにアップロード → タップして表示。</div>
-          <div class="step"><b>注釈で入力：</b> 画面下 <b>注釈</b>（鉛筆）→ <b>テキスト</b> を配置 → 氏名・日付を入力。</div>
-          <div class="step"><b>保存：</b> 右上 <b>保存</b>。<span class="mini">元ファイルを残したい場合は「コピーを保存」。</span></div>
-          <div class="step"><b>送付：</b> 保存したPDFを下記メールアドレスに送信。</div>
-        </div>
-        <div class="grid2">
-          <div class="block">
-            <h3>補足</h3>
-            <p class="mini">機密性が高い場合はPCでローカル編集、または印刷/手書きを推奨。</p>
-            <p class="mini">箇所ごとのズレについては拡大してドラッグで調整。</p>
-          </div>
-        </div>
-        <!-- Android 内の重複していた送付方法ボックスを削除 -->
-      </div>
     </section>
 
-    <!-- PC (Mac/Windows) -->
+    <!-- PC -->
     <section class="panel" id="p-pc" role="tabpanel" aria-labelledby="t-pc" aria-hidden="true">
       <h2>PCで署名する場合</h2>
       <p class="sub">お使いのOSを選んでください。</p>
       <div class="subsel" role="group" aria-label="PC OS選択">
-        <button class="chip" id="c-mac" aria-pressed="true">Mac</button>
+        <button class="chip" id="c-mac"     aria-pressed="true">Mac</button>
         <button class="chip" id="c-windows" aria-pressed="false">Windows</button>
       </div>
 
+      <!-- Mac -->
       <div class="pc-mac">
-        <div class="steps" style="margin-top:10px;">
-          <div class="step"><b>ステップ1｜契約書(PDF)のダウンロード：</b> メールに添付している契約書をダウンロードする。</div>
-          <div class="step"><b>ステップ2｜契約書(PDF)の記入：</b> ダウンロードしたPDFを開き「配信申込書兼承諾書」を選択→『フォーム入力のツールバー』をクリック。「申込日、氏名、住所、生年月日、アドレス、電話番号」にテキスト入力。<span class="mini">※未成年者の場合は親権者兼法定代理人の箇所も記入。</span></div>
-          <div class="step"><b>ステップ3｜記入漏れの確認：</b> 入力内容を確認する。</div>
-          <div class="step"><b>ステップ4｜送付：</b> 下記メールアドレス宛に記入済みPDFを添付して送信する。</div>
+        <div class="steps">
+          <div class="step"><div class="step-title">契約書(PDF)のダウンロード</div><div class="step-body">メールに添付されている契約書をローカルに保存。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">契約書(PDF)の記入</div><div class="step-body">PDFを開き「配信申込書兼承諾書」を選択→フォーム入力ツールバーで「申込日／氏名／住所／生年月日／アドレス／電話番号」を入力。未成年は親権者欄も記入。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">記入漏れ確認</div><div class="step-body">誤字・脱字や未入力がないかチェック。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">送付</div><div class="step-body">完成PDFをメールに添付して送信。</div></div>
         </div>
-        <div class="grid2">
-          <div class="block">
-            <h3>補足</h3>
-            <ul class="mini">
-              <li>等幅寄りのフォントと濃いグレーで自然な見た目。</li>
-              <li>用紙サイズ（A4/Letter）に注意。印刷時のズレ防止。</li>
-            </ul>
-          </div>
+      </div>
+
+      <!-- Windows -->
+      <div class="pc-windows" style="display:none;">
+        <div class="steps">
+          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">PDFを右クリック→「プログラムから開く」→Microsoft Edge。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">上部「テキストの追加」で氏名・日付を入力し、ドラッグで位置調整。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">固定化</div><div class="step-body">「印刷」→プリンター「Microsoft Print to PDF」で保存（フォント差異防止）。</div></div>
+          <div class="arrow">↓</div>
+          <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信。</div></div>
         </div>
       </div>
 
@@ -201,25 +191,6 @@
         <code>アドレス：noigrit@gmail.com
 件名：【TikTok契約書署名済み】
 本文：本名記載（フルネーム）</code>
-      </div>
-
-      <div class="pc-windows" style="display:none;">
-        <div class="steps" style="margin-top:10px;">
-          <div class="step"><b>PDFを開く：</b> 右クリック → <b>プログラムから開く → Microsoft Edge</b>。</div>
-          <div class="step"><b>テキスト署名：</b> 上部 <b>テキストの追加</b> → 氏名・日付を入力し、ドラッグで配置。</div>
-          <div class="step"><b>固定化：</b> 「印刷」を押し <b>Microsoft Print to PDF</b> で保存。</div>
-          <div class="step"><b>送付：</b> 記入事項を確認後、下記メールアドレスにPDFを添付して送信。</div>
-        </div>
-        <div class="grid2">
-          <div class="block">
-            <h3>補足</h3>
-            <ul class="mini">
-              <li>フォント差を避けたい → 必ず「印刷→PDF」で固定。</li>
-              <li>同じ署名を複数ページ → 1度作成してコピー&ペースト。</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Windows 内の重複していた送付方法ボックスを削除（PC全体の送付方法を使用） -->
       </div>
     </section>
 
@@ -228,20 +199,15 @@
       <h2>その他（印刷/手書き）</h2>
       <p class="sub">「手書き必須」や紙原本回収の指定がある相手に確実。</p>
       <div class="steps">
-        <div class="step"><b>データ準備：</b> PDFダウンロードしUSBに保存 or 専用アプリ(セブン=netprint、ファミマ/ローソン=PrintSmash）をインストール。</div>
-        <div class="step"><b>印刷：</b> こちらを参照(https://www.printing.ne.jp/support/landing/landing_pdfprint.html)</div>
-        <div class="step"><b>記入：</b> ボールペンで署名・日付。訂正は二重線＋訂正印の指示があるか事前確認。</div>
-        <div class="step"><b>スキャン：</b> <b>スキャン方法はこちらを参照(https://pdf.wondershare.jp/info/paper-to-pdf-convenience-store.html)</b> スマホやUSBに取り込み後、下記メールアドレスに添付して送信。</div>
+        <div class="step"><div class="step-title">データ準備</div><div class="step-body">PDFをダウンロードしてUSBに保存、またはコンビニ印刷アプリ（セブン=netprint、ファミマ/ローソン=PrintSmash）を準備。</div></div>
+        <div class="arrow">↓</div>
+        <div class="step"><div class="step-title">印刷</div><div class="step-body">店頭の指示に従ってPDFを印刷。</div></div>
+        <div class="arrow">↓</div>
+        <div class="step"><div class="step-title">記入</div><div class="step-body">ボールペンで署名・日付。訂正が必要な場合は二重線＋訂正印の有無を事前確認。</div></div>
+        <div class="arrow">↓</div>
+        <div class="step"><div class="step-title">スキャン</div><div class="step-body">スキャナやスマホでPDF化し、メールに添付して送信。</div></div>
       </div>
-      <div class="grid2">
-        <div class="block">
-          <h3>補足</h3>
-          <ul class="mini">
-            <li>曲がり防止：原稿台ガイドに合わせる。</li>
-            <li>容量軽減：白黒（文字）モード、300dpiで十分。</li>
-          </ul>
-        </div>
-      </div>
+
       <div class="sendbox">
         <h4>送付方法</h4>
         <code>アドレス：noigrit@gmail.com
@@ -253,8 +219,9 @@
 
   <div class="footer">© 2025 NOIGRIT 署名マニュアル. 本ページは一般的な実務ノウハウの提供を目的としています。</div>
 
+  <!-- JS：タブ & 機種/OS 切り替え（軽量） -->
   <script>
-    // === Minimal JS: enable tab switching & sub-choices ===
+    // タブ切り替え
     const tabs = Array.from(document.querySelectorAll('.tab'));
     const panels = Array.from(document.querySelectorAll('.panel'));
     function activateTop(id){
@@ -263,24 +230,36 @@
     }
     tabs.forEach(t=> t.addEventListener('click', ()=> activateTop(t.id.replace('t-',''))));
 
-    // Phone chips
+    // スマホ切替（iPhone/Android）
     const phoneI = document.querySelector('.phone-iphone');
     const phoneA = document.querySelector('.phone-android');
-    const chipI = document.getElementById('c-iphone');
-    const chipA = document.getElementById('c-android');
-    if(chipI && chipA){
-      chipI.addEventListener('click',()=>{ chipI.setAttribute('aria-pressed','true'); chipA.setAttribute('aria-pressed','false'); phoneI.style.display='block'; phoneA.style.display='none'; });
-      chipA.addEventListener('click',()=>{ chipI.setAttribute('aria-pressed','false'); chipA.setAttribute('aria-pressed','true'); phoneI.style.display='none'; phoneA.style.display='block'; });
+    const chipI  = document.getElementById('c-iphone');
+    const chipA  = document.getElementById('c-android');
+    if(chipI && chipA && phoneI && phoneA){
+      chipI.addEventListener('click',()=>{
+        chipI.setAttribute('aria-pressed','true'); chipA.setAttribute('aria-pressed','false');
+        phoneI.style.display='block'; phoneA.style.display='none';
+      });
+      chipA.addEventListener('click',()=>{
+        chipI.setAttribute('aria-pressed','false'); chipA.setAttribute('aria-pressed','true');
+        phoneI.style.display='none'; phoneA.style.display='block';
+      });
     }
 
-    // PC chips
-    const pcm = document.querySelector('.pc-mac');
-    const pcw = document.querySelector('.pc-windows');
+    // PC切替（Mac/Windows）
+    const pcm   = document.querySelector('.pc-mac');
+    const pcw   = document.querySelector('.pc-windows');
     const chipM = document.getElementById('c-mac');
     const chipW = document.getElementById('c-windows');
-    if(chipM && chipW){
-      chipM.addEventListener('click',()=>{ chipM.setAttribute('aria-pressed','true'); chipW.setAttribute('aria-pressed','false'); pcm.style.display='block'; pcw.style.display='none'; });
-      chipW.addEventListener('click',()=>{ chipM.setAttribute('aria-pressed','false'); chipW.setAttribute('aria-pressed','true'); pcm.style.display='none'; pcw.style.display='block'; });
+    if(chipM && chipW && pcm && pcw){
+      chipM.addEventListener('click',()=>{
+        chipM.setAttribute('aria-pressed','true'); chipW.setAttribute('aria-pressed','false');
+        pcm.style.display='block'; pcw.style.display='none';
+      });
+      chipW.addEventListener('click',()=>{
+        chipM.setAttribute('aria-pressed','false'); chipW.setAttribute('aria-pressed','true');
+        pcm.style.display='none'; pcw.style.display='block';
+      });
     }
   </script>
 </body>
