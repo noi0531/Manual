@@ -145,7 +145,7 @@
        <div class="step">
   <div class="step-title">保存/共有</div>
   <div class="step-body">
-    右上「完了」→「共有」→メールアプリを選択し、下記「送付方法」を参考に送付
+    右上「完了」→「ファイルを保存」→メールアプリを起動し添付後、下記「送付方法」を参考にメールを送信
     <span class="img-toggle"
           onclick="openGallery(this)"
           data-images="screenshots/iphone_step3_1.png,screenshots/iphone_step3_2.png"
@@ -156,32 +156,45 @@
       </div>
 
       <!-- Android（Acrobat想定） -->
-      <div class="phone-android" style="display:none;">
-        <div class="steps">
-          <div class="step">
-            <div class="step-title">PDFを開く（Acrobatで）</div>
-            <div class="step-body">
-              Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」(アプリがない場合はインストールしてください)
-              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png" data-alt="Android Acrobatで開く">(画像を参照)</span>
-            </div>
-          </div>
-          <div class="arrow">↓</div>
-          <div class="step">
-            <div class="step-title">テキスト入力</div>
-            <div class="step-body">
-              下部「塗りつぶしと署名」→「テキストを追加（Aa）」→ 氏名/住所/メール/電話を入力
-              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png" data-alt="Android テキスト入力">(画像を参照)</span>
-            </div>
-          </div>
-          <div class="arrow">↓</div>
-          <div class="step">
-            <div class="step-title">保存と送付</div>
-            <div class="step-body">
-              右上「共有」または「このデバイスに保存」でPDF保存→メールに添付して送信
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- STEP1 -->
+<div class="step">
+  <div class="step-title">PDFを開く（Acrobatで）</div>
+  <div class="step-body">
+    Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」  
+    （アプリがない場合はインストールしてください）
+    <span class="img-toggle"
+          onclick="openGallery(this)"
+          data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png,screenshots/android_step1_3.png"
+          data-alt="Android STEP1 Acrobatで開く">(画像を参照)</span>
+  </div>
+</div>
+<div class="arrow">↓</div>
+
+<!-- STEP2 -->
+<div class="step">
+  <div class="step-title">テキスト入力</div>
+  <div class="step-body">
+    下部「塗りつぶしと署名」→「テキストを追加（Aa）」を選び、
+    「氏名/住所/メール/電話」を入力
+    <span class="img-toggle"
+          onclick="openGallery(this)"
+          data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png"
+          data-alt="Android STEP2 テキスト入力">(画像を参照)</span>
+  </div>
+</div>
+<div class="arrow">↓</div>
+
+<!-- STEP3 -->
+<div class="step">
+  <div class="step-title">保存と送付</div>
+  <div class="step-body">
+    右上「共有」または「このデバイスに保存」でPDFを保存→メールに添付して送信
+    <span class="img-toggle"
+          onclick="openGallery(this)"
+          data-images="screenshots/android_step3_1.png"
+          data-alt="Android STEP3 保存と送付">(画像を参照)</span>
+  </div>
+</div>
 
       <div class="sendbox">
         <h4>送付方法</h4>
