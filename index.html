@@ -148,62 +148,54 @@
     右上「完了」→「ファイルを保存」→メールアプリを起動し添付後、下記「送付方法」を参考にメールを送信
     <span class="img-toggle"
           onclick="openGallery(this)"
-          data-images="screenshots/iphone_step3_1.png,screenshots/iphone_step3_2.png"
+          data-images="screenshots/iphone_step3_1.png"
           data-alt="iPhone STEP3 保存と送付">(画像を参照)</span>
   </div>
 </div>
         </div>
       </div>
-
-      <!-- Android（Acrobat想定） -->
-<!-- STEP1 -->
-<div class="step">
-  <div class="step-title">PDFを開く（Acrobatで）</div>
-  <div class="step-body">
-    Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」  
-    （アプリがない場合はインストールしてください）
-    <span class="img-toggle"
-          onclick="openGallery(this)"
-          data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png,screenshots/android_step1_3.png"
-          data-alt="Android STEP1 Acrobatで開く">(画像を参照)</span>
-  </div>
-</div>
-<div class="arrow">↓</div>
-
-<!-- STEP2 -->
-<div class="step">
-  <div class="step-title">テキスト入力</div>
-  <div class="step-body">
-    下部「塗りつぶしと署名」→「テキストを追加（Aa）」を選び、
-    「氏名/住所/メール/電話」を入力
-    <span class="img-toggle"
-          onclick="openGallery(this)"
-          data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png"
-          data-alt="Android STEP2 テキスト入力">(画像を参照)</span>
-  </div>
-</div>
-<div class="arrow">↓</div>
-
-<!-- STEP3 -->
-<div class="step">
-  <div class="step-title">保存と送付</div>
-  <div class="step-body">
-    右上「共有」または「このデバイスに保存」でPDFを保存→メールに添付して送信
-    <span class="img-toggle"
-          onclick="openGallery(this)"
-          data-images="screenshots/android_step3_1.png"
-          data-alt="Android STEP3 保存と送付">(画像を参照)</span>
-  </div>
-</div>
-
-      <div class="sendbox">
-        <h4>送付方法</h4>
-        <code>アドレス：noigrit@gmail.com
-件名：【TikTok契約書署名済み】
-本文：本名記載（フルネーム）</code>
+<!-- Android（Acrobat想定） -->
+<div class="phone-android" style="display:none;">
+  <div class="steps">
+    <!-- STEP1 -->
+    <div class="step">
+      <div class="step-title">PDFを開く（Acrobatで）</div>
+      <div class="step-body">
+        Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」
+        （アプリがない場合はインストールしてください）
+        <span class="img-toggle"
+              data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png,screenshots/android_step1_3.png"
+              data-alt="Android STEP1 Acrobatで開く">(画像を参照)</span>
       </div>
-    </section>
+    </div>
+    <div class="arrow">↓</div>
 
+    <!-- STEP2 -->
+    <div class="step">
+      <div class="step-title">テキスト入力</div>
+      <div class="step-body">
+ 下部「塗りつぶしと署名」→「テキストを追加（Aa）」→ 氏名/住所/メール/電話を入力→左上の「←」ボタンを二回押し戻る
+        <span class="img-toggle"
+              data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png"
+              data-alt="Android STEP2 テキスト入力">(画像を参照)</span>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+
+    <!-- STEP3 -->
+    <div class="step">
+      <div class="step-title">保存と送付</div>
+      <div class="step-body">
+      「Adobe Acrobat」の画面に記入したPDFが表示される→「共有」からメールに添付し下記送付方法を参考にメールを送信  右上「共有」または「このデバイスに保存」でPDFを保存→メールに添付して送信
+        <span class="img-toggle"
+              data-images="screenshots/android_step3_1.png"
+              data-alt="Android STEP3 保存と送付">(画像を参照)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- （この後に共通の送付ボックスが来る構成でOK） -->
     <!-- PC -->
     <section class="panel" id="p-pc" role="tabpanel" aria-labelledby="t-pc" aria-hidden="true">
       <h2>PCで署名する場合</h2>
