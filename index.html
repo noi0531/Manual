@@ -6,11 +6,7 @@
   <title>NOIGRIT 署名マニュアル｜PDFに署名する全部入りガイド</title>
   <meta name="description" content="NOIGRIT向け 署名マニュアル。スマホ（iPhone/Android）・PC（Mac/Windows）・印刷手書きの3カテゴリで超詳細に解説。標準機能のみ。スマホ最適化・軽量表示。"/>
   <style>
-    :root{
-      --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#38bdf8; --accent2:#22c55e;
-      --ng-y1:#fde047; --ng-y2:#f59e0b; --ng-stroke:#eab308;
-      --danger:#ef4444;
-    }
+    :root{ --bg:#0b1220; --panel:#0f172a; --ink:#e5e7eb; --muted:#94a3b8; --line:#1f2937; --accent:#38bdf8; --accent2:#22c55e; --ng-y1:#fde047; --ng-y2:#f59e0b; --ng-stroke:#eab308; --danger:#ef4444; }
     *{ box-sizing:border-box; }
     html,body{ height:100%; margin:0; padding:0; }
     body{ font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif; color:var(--ink); background:#0b1220; }
@@ -91,10 +87,10 @@
   </header>
 
   <div class="tabs" role="tablist" aria-label="NOIGRIT 署名カテゴリ">
-    <button class="tab" role="tab" aria-selected="true" aria-controls="p-intro"  id="t-intro">使い方 / 注意事項</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-phone" id="t-phone">スマホで署名する場合</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-pc"    id="t-pc">PCで署名する場合</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-print" id="t-print">その他（印刷/手書き）</button>
+    <button class="tab" type="button" role="tab" aria-selected="true"  aria-controls="p-intro"  id="t-intro">使い方 / 注意事項</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="p-phone" id="t-phone">スマホで署名する場合</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="p-pc"    id="t-pc">PCで署名する場合</button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="p-print" id="t-print">その他（印刷/手書き）</button>
   </div>
 
   <main>
@@ -119,8 +115,8 @@
       <h2>スマホで署名する場合</h2>
       <p class="sub">お使いの機種を選んでください。</p>
       <div class="subsel" role="group" aria-label="スマホ機種選択">
-        <button class="chip" id="c-iphone"  aria-pressed="true">iPhone</button>
-        <button class="chip" id="c-android" aria-pressed="false">Android</button>
+        <button class="chip" id="c-iphone"  aria-pressed="true"  type="button">iPhone</button>
+        <button class="chip" id="c-android" aria-pressed="false" type="button">Android</button>
       </div>
 
       <!-- iPhone -->
@@ -142,75 +138,79 @@
             </div>
           </div>
           <div class="arrow">↓</div>
-       <div class="step">
-  <div class="step-title">保存/共有</div>
-  <div class="step-body">
-    右上「完了」→「ファイルを保存」→メールアプリを起動し添付後、下記「送付方法」を参考にメールを送信
-    <span class="img-toggle"
-          onclick="openGallery(this)"
-          data-images="screenshots/iphone_step3_1.png"
-          data-alt="iPhone STEP3 保存と送付">(画像を参照)</span>
-  </div>
-</div>
+          <div class="step">
+            <div class="step-title">保存/共有</div>
+            <div class="step-body">
+              右上「完了」→「ファイルを保存」→メールアプリを起動し添付後、下記「送付方法」を参考にメール送信
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/iphone_step3_1.png" data-alt="iPhone STEP3 保存と送付">(画像を参照)</span>
+            </div>
+          </div>
         </div>
       </div>
-<!-- Android（Acrobat想定） -->
-<div class="phone-android" style="display:none;">
-  <div class="steps">
-    <!-- STEP1 -->
-    <div class="step">
-      <div class="step-title">PDFを開く（Acrobatで）</div>
-      <div class="step-body">
-        Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」
-        （アプリがない場合はインストールしてください）
-        <span class="img-toggle"
-              data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png,screenshots/android_step1_3.png"
-              data-alt="Android STEP1 Acrobatで開く">(画像を参照)</span>
-      </div>
-    </div>
-    <div class="arrow">↓</div>
 
-    <!-- STEP2 -->
-    <div class="step">
-      <div class="step-title">テキスト入力</div>
-      <div class="step-body">
- 下部「塗りつぶしと署名」→「テキストを追加（Aa）」→ 氏名/住所/メール/電話を入力→左上の「←」ボタンを二回押し戻る
-        <span class="img-toggle"
-              data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png"
-              data-alt="Android STEP2 テキスト入力">(画像を参照)</span>
+      <!-- Android（Acrobat想定） -->
+      <div class="phone-android" style="display:none;">
+        <div class="steps">
+          <div class="step">
+            <div class="step-title">PDFを開く（Acrobatで）</div>
+            <div class="step-body">
+              Googleドライブ→PDF右上「︙」→「アプリで開く」→「Adobe Acrobat」（未インストールなら導入）
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step1_1.png,screenshots/android_step1_2.png,screenshots/android_step1_3.png" data-alt="Android STEP1 Acrobatで開く">(画像を参照)</span>
+            </div>
+          </div>
+          <div class="arrow">↓</div>
+          <div class="step">
+            <div class="step-title">テキスト入力</div>
+            <div class="step-body">
+              下部「塗りつぶしと署名」→「テキストを追加（Aa）」→ 氏名/住所/メール/電話を入力→左上「←」で戻る
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step2_1.png,screenshots/android_step2_2.png" data-alt="Android STEP2 テキスト入力">(画像を参照)</span>
+            </div>
+          </div>
+          <div class="arrow">↓</div>
+          <div class="step">
+            <div class="step-title">保存と送付</div>
+            <div class="step-body">
+              Acrobatの一覧に編集済みPDFが表示→「共有」からメールに添付し、下記「送付方法」に従って送信
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/android_step3_1.png" data-alt="Android STEP3 保存と送付">(画像を参照)</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="arrow">↓</div>
 
-    <!-- STEP3 -->
-    <div class="step">
-      <div class="step-title">保存と送付</div>
-      <div class="step-body">
-      「Adobe Acrobat」の画面に記入したPDFが表示される→「共有」からメールに添付し下記送付方法を参考にメールを送信  右上「共有」または「このデバイスに保存」でPDFを保存→メールに添付して送信
-        <span class="img-toggle"
-              data-images="screenshots/android_step3_1.png"
-              data-alt="Android STEP3 保存と送付">(画像を参照)</span>
+      <!-- スマホ共通の送付方法 -->
+      <div class="sendbox">
+        <h4>送付方法</h4>
+        <code>アドレス：noigrit@gmail.com
+件名：【TikTok契約書署名済み】
+本文：本名記載（フルネーム）</code>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- （この後に共通の送付ボックスが来る構成でOK） -->
     <!-- PC -->
     <section class="panel" id="p-pc" role="tabpanel" aria-labelledby="t-pc" aria-hidden="true">
       <h2>PCで署名する場合</h2>
       <p class="sub">お使いのOSを選んでください。</p>
       <div class="subsel" role="group" aria-label="PC OS選択">
-        <button class="chip" id="c-mac"     aria-pressed="true">Mac</button>
-        <button class="chip" id="c-windows" aria-pressed="false">Windows</button>
+        <button class="chip" id="c-mac"     aria-pressed="true"  type="button">Mac</button>
+        <button class="chip" id="c-windows" aria-pressed="false" type="button">Windows</button>
       </div>
 
       <!-- Mac -->
       <div class="pc-mac">
         <div class="steps">
-          <div class="step"><div class="step-title">契約書(PDF)のダウンロード</div><div class="step-body">メールの添付PDFをローカルに保存（デスクトップ等、わかりやすい場所）</div></div>
+          <div class="step">
+            <div class="step-title">契約書(PDF)のダウンロード</div>
+            <div class="step-body">メールの添付PDFをローカルに保存（わかりやすい場所）
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/mac_step1_1.png,screenshots/mac_step1_2.png" data-alt="Mac STEP1 ダウンロード">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">契約書(PDF)の記入</div><div class="step-body">PDFを開き「配信申込書兼承諾書」→フォーム入力ツールで申込日/氏名/住所/生年月日/アドレス/電話番号を入力（未成年は親権者欄も）</div></div>
+          <div class="step">
+            <div class="step-title">契約書(PDF)の記入</div>
+            <div class="step-body">PDFを開き「配信申込書兼承諾書」→フォーム入力ツールで各項目を記入
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/mac_step2_1.png,screenshots/mac_step2_2.png" data-alt="Mac STEP2 入力">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
           <div class="step"><div class="step-title">記入漏れ確認</div><div class="step-body">誤字・未入力がないか全ページを確認</div></div>
           <div class="arrow">↓</div>
@@ -221,11 +221,26 @@
       <!-- Windows -->
       <div class="pc-windows" style="display:none;">
         <div class="steps">
-          <div class="step"><div class="step-title">PDFを開く</div><div class="step-body">ファイルを右クリック→「プログラムから開く」→Microsoft Edge</div></div>
+          <div class="step">
+            <div class="step-title">PDFを開く</div>
+            <div class="step-body">ファイルを右クリック→「プログラムから開く」→Microsoft Edge
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/win_step1_1.png" data-alt="Windows STEP1 Edgeで開く">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">テキスト署名</div><div class="step-body">上部「テキストの追加」→氏名・日付など入力→ドラッグで位置調整</div></div>
+          <div class="step">
+            <div class="step-title">テキスト署名</div>
+            <div class="step-body">上部「テキストの追加」→氏名・日付など入力→ドラッグで位置調整
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/win_step2_1.png,screenshots/win_step2_2.png" data-alt="Windows STEP2 テキスト追加">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
-          <div class="step"><div class="step-title">固定化</div><div class="step-body">「印刷」→「Microsoft Print to PDF」で保存（フォント差異防止）</div></div>
+          <div class="step">
+            <div class="step-title">固定化</div>
+            <div class="step-body">「印刷」→「Microsoft Print to PDF」で保存（フォント差異防止）
+              <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/win_step3_1.png" data-alt="Windows STEP3 PDF保存">(画像を参照)</span>
+            </div>
+          </div>
           <div class="arrow">↓</div>
           <div class="step"><div class="step-title">送付</div><div class="step-body">保存したPDFをメールに添付して送信</div></div>
         </div>
@@ -244,13 +259,17 @@
       <h2>その他（印刷/手書き）</h2>
       <p class="sub">「手書き必須」や紙原本回収の指定がある相手に確実。</p>
       <div class="steps">
-        <div class="step"><div class="step-title">データ準備</div><div class="step-body">PDFをダウンロードしてUSBに保存、またはコンビニ印刷アプリ（セブン=netprint、ファミマ/ローソン=PrintSmash）を準備</div></div>
+        <div class="step"><div class="step-title">データ準備</div><div class="step-body">PDFをダウンロードしてUSBへ、またはコンビニ印刷アプリを準備
+          <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/print_step1_1.png" data-alt="印刷 STEP1 準備">(画像を参照)</span>
+        </div></div>
         <div class="arrow">↓</div>
-        <div class="step"><div class="step-title">印刷</div><div class="step-body">店頭の案内に従いPDFを印刷（A4推奨、濃度は標準）</div></div>
+        <div class="step"><div class="step-title">印刷</div><div class="step-body">店頭の案内に従いPDFを印刷（A4推奨、濃度は標準）
+          <span class="img-toggle" onclick="openGallery(this)" data-images="screenshots/print_step2_1.png" data-alt="印刷 STEP2 印刷">(画像を参照)</span>
+        </div></div>
         <div class="arrow">↓</div>
         <div class="step"><div class="step-title">記入</div><div class="step-body">ボールペンで署名・日付。修正は二重線＋訂正印の有無を事前確認</div></div>
         <div class="arrow">↓</div>
-        <div class="step"><div class="step-title">スキャン</div><div class="step-body">スマホやスキャナでPDF化→メールに添付して送信</div></div>
+        <div class="step"><div class="step-title">スキャン</div><div class="step-body">スマホ/スキャナでPDF化→メールに添付して送信</div></div>
       </div>
 
       <div class="sendbox">
@@ -312,17 +331,14 @@
     modal.className = 'modal';
     modal.innerHTML = `
       <div class="modal-inner" role="dialog" aria-modal="true">
-        <div class="modal-header">
-          <span class="modal-close" aria-label="閉じる">&times;</span>
-        </div>
+        <div class="modal-header"><span class="modal-close" aria-label="閉じる">&times;</span></div>
         <div class="modal-body"><img alt=""></div>
         <div class="modal-footer">
           <button class="nav-btn" data-dir="-1">← 前へ</button>
           <span class="counter">1 / 1</span>
           <button class="nav-btn" data-dir="1">次へ →</button>
         </div>
-        <div class="thumbs"></div>
-      </div>`;
+        <div class="thumbs"></div>`;
     document.body.appendChild(modal);
 
     let gallery = { urls:[], index:0, alt:'' };
@@ -343,30 +359,25 @@
         thumbs.appendChild(t);
       });
     }
+    function show(delta){ gallery.index = (gallery.index + delta + gallery.urls.length) % gallery.urls.length; render(); }
+    function closeModal(){ modal.style.display='none'; gallery = { urls:[], index:0, alt:'' }; }
 
-    function show(delta){
-      gallery.index = (gallery.index + delta + gallery.urls.length) % gallery.urls.length;
-      render();
-    }
-
-    function closeModal(){
-      modal.style.display='none';
-      gallery = { urls:[], index:0, alt:'' };
-    }
-
-    modal.addEventListener('click', (e)=>{
-      if(e.target === modal) closeModal();
-    });
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
     modal.querySelector('.modal-close').addEventListener('click', closeModal);
-    modal.querySelectorAll('.nav-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=> show(parseInt(btn.dataset.dir,10)));
-    });
+    modal.querySelectorAll('.nav-btn').forEach(btn=> btn.addEventListener('click', ()=> show(parseInt(btn.dataset.dir,10))));
     document.addEventListener('keydown', (e)=>{
       if(modal.style.display==='block'){
         if(e.key==='Escape') closeModal();
         if(e.key==='ArrowRight') show(1);
         if(e.key==='ArrowLeft') show(-1);
       }
+    });
+
+    // クリック委譲（onclickが抜けていても動くように）
+    document.addEventListener('click', (e)=>{
+      const trigger = e.target.closest('.img-toggle');
+      if(!trigger) return;
+      openGallery(trigger);
     });
 
     // 公開関数：トリガー要素から data-images を読む
